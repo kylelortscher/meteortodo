@@ -2,17 +2,11 @@ Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isClient) {
   Template.body.helpers({
-    tasks: [
-      { text: "This is task 1" },
-      { text: "This is task 2" },
-      { text: "This is task 3" }
-    ]
-  });
-  Template.body.helpers({
     tasks: function () {
       return Tasks.find({});
     }
   });
+  //Connnect The Form To Display On The Page
   Template.body.events({
     "submit .new-task": function (event) {
 
@@ -28,6 +22,7 @@ if (Meteor.isClient) {
       return false;
     }
   });
+  //Sort Tasks By Newest At The Top
   Template.body.helpers({
     tasks: function () {
       return Tasks.find({}, {sort: {createdAt: -1}});
