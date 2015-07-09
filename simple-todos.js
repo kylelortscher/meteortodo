@@ -28,6 +28,15 @@ if (Meteor.isClient) {
       return Tasks.find({}, {sort: {createdAt: -1}});
     }
   });
+  Template.task.events({
+    "click .toggle-checked": function () {
+      //Set The Checked Property Opposite To Its Current Value
+      Tasks.update(this._id, {$set: {checked: ! this.checked}});
+    },
+    "click .delete": function () {
+      Tasks.remove(this._id);
+    }
+  });
 }
 
 if (Meteor.isServer) {
