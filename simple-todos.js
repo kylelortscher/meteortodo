@@ -15,6 +15,11 @@ if (Meteor.isClient) {
       return Session.get("hideCompleted");
     }
   });
+  Template.body.helpers({
+    incompleteCount: function () {
+      return Tasks.find({checked: {$ne: true}}).count();
+    }
+  });
   //Connnect The Form To Display On The Page
   Template.body.events({
     "submit .new-task": function (event) {
